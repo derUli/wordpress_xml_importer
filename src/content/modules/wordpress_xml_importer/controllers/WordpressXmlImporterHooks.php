@@ -4,7 +4,7 @@ class WordpressXmlImporterHooks extends Controller {
 	public function getSettingsHeadline() {
 		return "Wordpress XML Importer";
 	}
-	public function getSettingsText() {
+	public function getSettingsLinkText() {
 		return get_translation ( "open" );
 	}
 	public function settings() {
