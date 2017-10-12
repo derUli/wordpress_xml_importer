@@ -23,7 +23,7 @@ Format: ![Alt Text](url)
 
 
 ## Einschränkungen
-wordpress_xml_importer befindet sich noch in einem frühen Stand der Entwicklung daher sind folgende Features noch nicht vorhanden:
+wordpress_xml_importer befindet sich noch in einem frühen Stand der Entwicklung, daher sind folgende Features noch nicht vorhanden:
 * Import zu blog noch nicht möglich
 * Medien werden nicht importiert
 * Individuelle Menüs werden nicht unterstützt
