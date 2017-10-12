@@ -1,7 +1,7 @@
 # wordpress_xml_importer
 ## Beschreibung
 Importieren Sie Inhalte aus Wordpress in UliCMS.
-Wordpress kann Inhalte als "WordPress eXtended RSS" exportieren, einem XML-Dateiformat, welches Sie mit diesem Modul in UliCMS importieren können
+Wordpress kann Inhalte als "WordPress eXtended RSS" exportieren, ein XML-Dateiformat, welches Sie mit diesem Modul in UliCMS importieren können
 
 ## Anleitung
 ### Inhalte aus Wordpress exportieren
