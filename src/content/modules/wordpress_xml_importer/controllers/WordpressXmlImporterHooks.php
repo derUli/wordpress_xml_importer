@@ -15,7 +15,6 @@ class WordpressXmlImporterHooks extends Controller {
 		$idMapping = array ();
 		
 		$import_from = Request::getVar ( "import_from", "file", "str" );
-		// TODO: Handle Upload
 		$replace = Request::hasVar ( "replace" );
 		$import_to = Request::getVar ( "import_to", "article", "str" );
 		$language = Request::getVar ( "language", getSystemLanguage (), "str" );
@@ -26,6 +25,8 @@ class WordpressXmlImporterHooks extends Controller {
 		$parent = Request::getVar ( "parent", null, "int" ) > 0 ? Request::getVar ( "parent", null, "int" ) : null;
 		
 		$tmpFile = Path::resolve ( "ULICMS_TMP/" . uniqid () );
+		
+		// handle uploaded xml file
 		if (move_uploaded_file ( $_FILES ['file'] ['tmp_name'], $tmpFile )) {
 			$importer = new WordpressXmlImporter ( $tmpFile );
 			$posts = $importer->getPosts ();
@@ -71,10 +72,13 @@ class WordpressXmlImporterHooks extends Controller {
 					$data->article_date = date ( 'Y-m-d H:i:s', $post->postDate );
 				}
 				$data->save ();
+				
+				// map Ids from Wordpress to IDs from UliCMS
 				if ($post->postId > 0) {
 					$idMapping [$post->postId] = $data->id;
 				}
 			}
+			// set parent pages
 			foreach ( $posts as $post ) {
 				try {
 					$data = ContentFactory::loadBySystemnameAndLanguage ( $post->postSlug, $language );
