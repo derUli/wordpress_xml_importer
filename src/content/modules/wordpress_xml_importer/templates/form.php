@@ -1,20 +1,40 @@
 <?php
-$languages = getAllLanguages ();
-$pkg = new PackageManager ();
-$manager = new UserManager ();
-$menus = getAllMenus ( true );
-$default_menu = in_array ( "top", getAllMenus ( true ) ) ? "top" : null;
-$users = $manager->getAllUsers ();
-if (! empty ( $_SESSION ["filter_language"] )) {
-	$default_language = $_SESSION ["filter_language"];
+$languages = getAllLanguages();
+$pkg = new PackageManager();
+$manager = new UserManager();
+$menus = getAllMenus(true);
+$default_menu = in_array("top", getAllMenus(true)) ? "top" : null;
+$users = $manager->getAllUsers();
+if (! empty($_SESSION["filter_language"])) {
+    $default_language = $_SESSION["filter_language"];
 } else {
-	$default_language = Settings::get ( "default_language" );
+    $default_language = Settings::get("default_language");
 }
-$pages = getAllPages ( $default_language, "title", false );
+$pages = getAllPages($default_language, "title", false);
 
-echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doImport" );
+echo ModuleHelper::buildMethodCallUploadForm("WordpressXmlImporterHooks", "doImport");
 ?>
 <h3><?php translate("from")?></h3>
+<?php
+
+if (Request::hasVar("errors")) {
+    $errors = explode(",", Request::getVar("errors"));
+    foreach ($errors as $error) {
+        ?>
+
+<div class="alert alert-danger fade in alert-dismissable">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close"
+		title="close">×</a>
+    <?php secure_translate($error);?>
+</div>
+<?php }} else if(Request::hasVar("success")){?>
+<div class="alert alert-success fade in alert-dismissable"
+	style="margin-top: 18px;">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close"
+		title="close">×</a>
+    <?php translate("import_finished");?>
+</div>
+<?php }?>
 <p>
 	<strong><?php translate("import_from")?></strong><br /> <select
 		name="import_from" value="">
@@ -80,27 +100,27 @@ echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doI
 			]
 		</option>
 		<?php
-		
-		foreach ( $pages as $key => $page ) {
-			?>
+
+foreach ($pages as $key => $page) {
+    ?>
 		<option value="<?php
-			
-			echo $page ["id"];
-			?>">
+    
+    echo $page["id"];
+    ?>">
 			<?php
-			
-			echo $page ["title"];
-			?>
+    
+    echo $page["title"];
+    ?>
 			(ID:
 			<?php
-			
-			echo $page ["id"];
-			?>
+    
+    echo $page["id"];
+    ?>
 			)
 		</option>
 		<?php
-		}
-		?>
+}
+?>
 		</select>
 	</p>
 </div>
