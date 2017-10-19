@@ -10,3 +10,4 @@ idefine("TRANSLATION_DEFAULT_CATEGORY", "Standardkategorie");
 
 idefine("TRANSLATION_INVALID_XML", "Fehlerhafte Xml-Datei!");
 idefine("TRANSLATION_IMPORT_FINISHED", "Der Import wurde durchgeführt.");
+idefine("TRANSLATION_NO_FILE_WAS_UPLOADED", "Es wurde keine Datei hochgeladen.");

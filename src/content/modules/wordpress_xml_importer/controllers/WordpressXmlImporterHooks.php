@@ -106,8 +106,10 @@ class WordpressXmlImporterHooks extends Controller
                     }
                 }
             } catch (InvalidXmlException $e) {
-                $errors[] = get_translation("invalid_xml");
+                $errors[] = "invalid_xml";
             }
+        } else {
+            $errors[] = "no_file_was_uploaded";
         }
         
         unlink($tmpFile);
