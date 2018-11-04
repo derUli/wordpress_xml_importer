@@ -30,6 +30,7 @@ class WordpressXmlImporterHooks extends Controller
         $import_to = Request::getVar("import_to", "article", "str");
         $language = Request::getVar("language", getSystemLanguage(), "str");
         $autor = Request::getVar("autor", get_user_id(), "int");
+        $group_id = Request::getVar("group_id", $_SESSION["group_id"], "int");
         $categories = Category::getAll();
         $category = Request::getVar("category", $categories[0], "int");
         $menu = Request::getVar("menu", "none", "str");
@@ -74,6 +75,7 @@ class WordpressXmlImporterHooks extends Controller
                     $data->category = $category;
                     $data->menu = $menu;
                     $data->autor = $autor;
+                    $data->group_id = $group_id;
                     $data->language = $language;
                     $data->content = $post->postContent;
                     // Todo convert postDate to Timestamp and set it

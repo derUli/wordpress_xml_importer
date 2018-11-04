@@ -5,6 +5,7 @@ $manager = new UserManager();
 $menus = getAllMenus(true);
 $default_menu = in_array("top", getAllMenus(true)) ? "top" : null;
 $users = $manager->getAllUsers();
+$groups = Group::getAll();
 if (! empty($_SESSION["filter_language"])) {
     $default_language = $_SESSION["filter_language"];
 } else {
@@ -73,9 +74,18 @@ if (Request::hasVar("errors")) {
 </select>
 	</p>
 	<p>
-		<strong><?php translate("owner")?></strong><br /> <select name="autor">
+		<strong><?php translate("owner")?> <?php translate("user");?></strong><br />
+		<select name="autor">
 <?php foreach($users as $user){?>
 <option value="<?php Template::escape($user->getId())?>"><?php Template::escape($user->getUsername());?></option>
+<?php }?>
+</select>
+	</p>
+	<p>
+		<strong><?php translate("owner")?> <?php translate("group");?></strong><br />
+		<select name="group_id">
+<?php foreach($groups as $group){?>
+<option value="<?php Template::escape($group->getId())?>"><?php Template::escape($group->getName());?></option>
 <?php }?>
 </select>
 	</p>
