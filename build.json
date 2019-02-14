@@ -1,11 +1,11 @@
 {
 	"id": "wordpress_xml_importer",
-	"version": "0.3",
+	"version": "0.4",
 	"description": "Wordpress XML Importer",
 	"categories": [
 		"importer",
 		"content",
 		"wordpress"
 	],
-	"compatible_from": "2019.1"
+	"compatible_from": "2019.1.3"
 }

@@ -50,7 +50,7 @@ class WordpressXmlImporterHooks extends Controller
                     $data = null;
                     
                     try {
-                        $newData = ContentFactory::loadBySystemnameAndLanguage($post->postSlug, $language);
+                        $newData = ContentFactory::getBySystemnameAndLanguage($post->postSlug, $language);
                         if ($newData->id) {
                             if ($replace) {
                                 $data = $newData;
@@ -98,7 +98,7 @@ class WordpressXmlImporterHooks extends Controller
                 // set parent pages
                 foreach ($posts as $post) {
                     try {
-                        $data = ContentFactory::loadBySystemnameAndLanguage($post->postSlug, $language);
+                        $data = ContentFactory::getBySystemnameAndLanguage($post->postSlug, $language);
                         if ($post->postParent > 0) {
                             $data->parent = $idMapping[$post->postParent];
                             $data->save();
