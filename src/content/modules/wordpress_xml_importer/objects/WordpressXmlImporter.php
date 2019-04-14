@@ -43,8 +43,8 @@ class WordpressXmlImporter
             $post = array(
                 "postTitle" => trim($item[0]->title),
                 "postSlug" => ! $wpnNS->post_name ? $this->_slug(strval($item[0]->title)) : $wpNs->post_name,
-                "postContent" => strval($content->encoded),
-                "postDesc" => strval($excerpt->encoded),
+                "postContent" => nl2br($content->encoded),
+                "postDesc" => nl2br($excerpt->encoded),
                 "postDate" => strtotime($item[0]->pubDate),
                 "postCategories" => implode(", ", $categories),
                 "commentStatus" => strval($wpNs->comment_status) == "open",
