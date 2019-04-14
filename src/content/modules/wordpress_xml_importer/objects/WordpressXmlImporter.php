@@ -17,7 +17,7 @@ class WordpressXmlImporter
 
     private function _slug($text)
     {
-        $text = StringHelper::cleanString($text, "_");
+        $text = StringHelper::cleanString($text, "-");
         return $text;
     }
 
@@ -41,7 +41,7 @@ class WordpressXmlImporter
             $wpNs = $item->children('http://wordpress.org/export/1.2/');
             
             $post = array(
-                "postTitle" => strval($item[0]->title),
+                "postTitle" => trim($item[0]->title),
                 "postSlug" => ! $wpnNS->post_name ? $this->_slug(strval($item[0]->title)) : $wpNs->post_name,
                 "postContent" => strval($content->encoded),
                 "postDesc" => strval($excerpt->encoded),
