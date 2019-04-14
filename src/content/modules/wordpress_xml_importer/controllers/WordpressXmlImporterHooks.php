@@ -29,7 +29,7 @@ class WordpressXmlImporterHooks extends Controller
         $replace = Request::hasVar("replace");
         $import_to = Request::getVar("import_to", "article", "str");
         $language = Request::getVar("language", getSystemLanguage(), "str");
-        $autor = Request::getVar("autor", get_user_id(), "int");
+        $author_id = Request::getVar("author_id", get_user_id(), "int");
         $group_id = Request::getVar("group_id", $_SESSION["group_id"], "int");
         $categories = Category::getAll();
         $category = Request::getVar("category", $categories[0], "int");
@@ -74,7 +74,7 @@ class WordpressXmlImporterHooks extends Controller
                     $data->parent = $parent;
                     $data->category = $category;
                     $data->menu = $menu;
-                    $data->autor = $autor;
+                    $data->author_id = $author_id;
                     $data->group_id = $group_id;
                     $data->language = $language;
                     $data->content = $post->postContent;

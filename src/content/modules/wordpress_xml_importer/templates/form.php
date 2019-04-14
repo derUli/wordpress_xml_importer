@@ -78,7 +78,7 @@ if (Request::hasVar("errors")) {
 		</p>
 		<p>
 			<strong><?php translate("owner")?> <?php translate("user");?></strong><br />
-			<select name="autor">
+			<select name="author_id">
 	<?php foreach($users as $user){?>
 	<option value="<?php Template::escape($user->getId())?>"><?php Template::escape($user->getUsername());?></option>
 	<?php }?>
