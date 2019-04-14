@@ -28,13 +28,14 @@ $(function() {
 });
 
 function filterParentPages() {
+	var url = $("#main-form").data("parent-pages-url");
 	var data = {
-		ajax_cmd : "getPageListByLang",
 		mlang : $("select[name='language']").val(),
 		mmenu : $("select[name='menu']").val(),
-		mparent : $("select[name='parent']").val()
+		mparent : $("select[name='parent']").val(),
+		csrf_token :$("input[name='csrf_token']").val()
 	};
-	$.post("index.php", data, function(text, status) {
+	$.post(url, data, function(text, status) {
 		$("select[name='parent']").html(text);
 	});
 }
