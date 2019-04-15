@@ -1,30 +1,25 @@
 <?php
 
-class WordpressXmlImporterHooks extends Controller
-{
+class WordpressXmlImporterHooks extends Controller {
 
     private $moduleName = "wordpress_xml_importer";
 
-    public function getSettingsHeadline()
-    {
+    public function getSettingsHeadline() {
         return "Wordpress XML Importer";
     }
 
-    public function getSettingsLinkText()
-    {
+    public function getSettingsLinkText() {
         return get_translation("open");
     }
 
-    public function settings()
-    {
+    public function settings() {
         return Template::executeModuleTemplate($this->moduleName, "form.php");
     }
 
-    public function doImport()
-    {
+    public function doImport() {
         @set_time_limit(0);
         $idMapping = array();
-        
+
         $import_from = Request::getVar("import_from", "file", "str");
         $replace = Request::hasVar("replace");
         $import_to = Request::getVar("import_to", "article", "str");
@@ -35,20 +30,20 @@ class WordpressXmlImporterHooks extends Controller
         $category = Request::getVar("category", $categories[0], "int");
         $menu = Request::getVar("menu", "none", "str");
         $parent = Request::getVar("parent", null, "int") > 0 ? Request::getVar("parent", null, "int") : null;
-        
+
         $tmpFile = Path::resolve("ULICMS_TMP/" . uniqid());
         $errors = array();
-        
+
         // handle uploaded xml file
         if (move_uploaded_file($_FILES['file']['tmp_name'], $tmpFile)) {
             try {
                 $importer = new WordpressXmlImporter($tmpFile);
-                
+
                 $posts = $importer->getPosts();
-                
+
                 foreach ($posts as $post) {
                     $data = null;
-                    
+
                     try {
                         $newData = ContentFactory::getBySystemnameAndLanguage($post->postSlug, $language);
                         if ($newData->id) {
@@ -89,7 +84,7 @@ class WordpressXmlImporterHooks extends Controller
                         $data->article_date = date('Y-m-d H:i:s', $post->postDate);
                     }
                     $data->save();
-                    
+
                     // map Ids from Wordpress to IDs from UliCMS
                     if ($post->postId > 0) {
                         $idMapping[$post->postId] = $data->id;
@@ -113,7 +108,7 @@ class WordpressXmlImporterHooks extends Controller
         } else {
             $errors[] = "no_file_was_uploaded";
         }
-        
+
         unlink($tmpFile);
         if (count($errors) > 0) {
             $url = ModuleHelper::buildAdminURL($this->moduleName, "errors=" . implode(",", $errors));
@@ -122,4 +117,5 @@ class WordpressXmlImporterHooks extends Controller
         }
         Request::redirect($url);
     }
+
 }
