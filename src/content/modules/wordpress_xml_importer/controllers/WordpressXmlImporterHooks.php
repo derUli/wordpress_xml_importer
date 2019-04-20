@@ -27,7 +27,7 @@ class WordpressXmlImporterHooks extends Controller {
         $author_id = Request::getVar("author_id", get_user_id(), "int");
         $group_id = Request::getVar("group_id", $_SESSION["group_id"], "int");
         $categories = Category::getAll();
-        $category = Request::getVar("category", $categories[0], "int");
+        $category_id = Request::getVar("category_id", $categories[0], "int");
         $menu = Request::getVar("menu", "none", "str");
         $parent = Request::getVar("parent", null, "int") > 0 ? Request::getVar("parent", null, "int") : null;
 
@@ -67,7 +67,7 @@ class WordpressXmlImporterHooks extends Controller {
                     $data->title = $post->postTitle;
                     $data->systemname = $post->postSlug;
                     $data->parent = $parent;
-                    $data->category = $category;
+                    $data->category_id = $category_id;
                     $data->menu = $menu;
                     $data->author_id = $author_id;
                     $data->group_id = $group_id;
