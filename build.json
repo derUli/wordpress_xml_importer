@@ -1,11 +1,7 @@
 {
-	"id": "wordpress_xml_importer",
-	"version": "0.6",
-	"description": "Wordpress XML Importer",
-	"categories": [
-		"importer",
-		"content",
-		"wordpress"
-	],
-	"compatible_from": "2019.2.7"
+  "id": "wordpress_xml_importer",
+  "version": "0.7",
+  "description": "Wordpress XML Importer",
+  "categories": ["importer", "content", "wordpress"],
+  "compatible_from": "2019.2.8"
 }
