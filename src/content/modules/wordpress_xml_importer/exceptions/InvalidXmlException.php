@@ -1,5 +1,5 @@
 <?php
 
-class InvalidXmlException extends Exception
-{
+class InvalidXmlException extends Exception {
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\Category;
+
 class WordpressXmlImporterHooks extends Controller {
 
     private $moduleName = "wordpress_xml_importer";
@@ -29,7 +31,7 @@ class WordpressXmlImporterHooks extends Controller {
         $categories = Category::getAll();
         $category_id = Request::getVar("category_id", $categories[0], "int");
         $menu = Request::getVar("menu", "none", "str");
-        $parent = Request::getVar("parent", null, "int") > 0 ? Request::getVar("parent", null, "int") : null;
+        $parent_id = Request::getVar("parent_id", null, "int") > 0 ? Request::getVar("parent_id", null, "int") : null;
 
         $tmpFile = Path::resolve("ULICMS_TMP/" . uniqid());
         $errors = array();
@@ -66,7 +68,7 @@ class WordpressXmlImporterHooks extends Controller {
                     $data->type = $import_to;
                     $data->title = $post->postTitle;
                     $data->slug = $post->postSlug;
-                    $data->parent = $parent;
+                    $data->parent_id = $parent_id;
                     $data->category_id = $category_id;
                     $data->menu = $menu;
                     $data->author_id = $author_id;
@@ -76,7 +78,7 @@ class WordpressXmlImporterHooks extends Controller {
                     // Todo convert postDate to Timestamp and set it
                     $data->position = $post->menuOrder;
                     // Todo map ids from import to our ids.
-                    $data->parent = $parent;
+                    $data->parent_id = $parent_id;
                     $data->created = $post->postDate;
                     $data->lastmodified = $post->postDate;
                     if ($data instanceof Article or $data->type == "article") {
@@ -90,12 +92,12 @@ class WordpressXmlImporterHooks extends Controller {
                         $idMapping[$post->postId] = $data->id;
                     }
                 }
-                // set parent pages
+                // set parent_id pages
                 foreach ($posts as $post) {
                     try {
                         $data = ContentFactory::getBySlugAndLanguage($post->postSlug, $language);
                         if ($post->postParent > 0) {
-                            $data->parent = $idMapping[$post->postParent];
+                            $data->parent_id = $idMapping[$post->postParent];
                             $data->save();
                         }
                     } catch (Exception $e) {

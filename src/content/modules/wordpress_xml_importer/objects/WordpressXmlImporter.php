@@ -1,5 +1,7 @@
 <?php
 
+use UliCMS\Models\Content\Categories;
+
 /**
  * WordpressXmlImporter class - Manages the WordPress XML file and gets all data from that.
  */

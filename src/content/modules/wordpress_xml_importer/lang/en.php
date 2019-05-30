@@ -1,4 +1,5 @@
 <?php
+
 idefine("TRANSLATION_FROM", "From");
 idefine("TRANSLATION_TO", "To");
 

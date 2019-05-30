@@ -1,4 +1,5 @@
 <?php
+
 idefine("TRANSLATION_FROM", "Von");
 idefine("TRANSLATION_TO", "Nach");
 
