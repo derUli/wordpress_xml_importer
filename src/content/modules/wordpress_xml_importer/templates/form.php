@@ -16,7 +16,7 @@ if (!empty($_SESSION["filter_language"])) {
 }
 $pages = getAllPages($default_language, "title", false);
 
-echo ModuleHelper::buildMethodCallUploadForm("WordpressXmlImporterHooks", "doImport", array(), "post", array(
+echo ModuleHelper::buildMethodCallUploadForm("WordpressXmlImporterHooks", "doImport", [], "post", array(
     "id" => "main-form",
     "data-parent-pages-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "filterParentPages")
         )

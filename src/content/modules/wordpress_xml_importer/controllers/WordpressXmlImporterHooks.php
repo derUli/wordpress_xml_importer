@@ -20,7 +20,7 @@ class WordpressXmlImporterHooks extends Controller {
 
     public function doImport() {
         @set_time_limit(0);
-        $idMapping = array();
+        $idMapping = [];
 
         $import_from = Request::getVar("import_from", "file", "str");
         $replace = Request::hasVar("replace");
@@ -34,7 +34,7 @@ class WordpressXmlImporterHooks extends Controller {
         $parent_id = Request::getVar("parent_id", null, "int") > 0 ? Request::getVar("parent_id", null, "int") : null;
 
         $tmpFile = Path::resolve("ULICMS_TMP/" . uniqid());
-        $errors = array();
+        $errors = [];
 
         // handle uploaded xml file
         if (move_uploaded_file($_FILES['file']['tmp_name'], $tmpFile)) {

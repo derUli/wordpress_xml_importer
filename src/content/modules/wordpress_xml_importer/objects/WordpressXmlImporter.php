@@ -24,11 +24,11 @@ class WordpressXmlImporter {
         if (!$xml) {
             throw new InvalidXmlException($this->wpXML . " is not a valid xml file.");
         }
-        $posts = array();
+        $posts = [];
         $namespaces = $xml->getNameSpaces(true);
 
         foreach ($xml->channel->item as $item) {
-            $categories = array();
+            $categories = [];
             foreach ($item->category as $category) {
                 $categories[] = $category['nicename'];
             }
